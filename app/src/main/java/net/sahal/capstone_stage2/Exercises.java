@@ -1,10 +1,11 @@
 package net.sahal.capstone_stage2;
 
-public class Exercises {
+import java.io.Serializable;
+
+public class Exercises implements Serializable {
 
     private String exercise;
     private String videos;
-
 
     public Exercises() {
     }
@@ -18,15 +19,7 @@ public class Exercises {
         return exercise;
     }
 
-    public void setExercise(String exercise) {
-        this.exercise = exercise;
-    }
-
     public String getVideos() {
         return videos;
-    }
-
-    public void setVideos(String videos) {
-        this.videos = videos;
     }
 }

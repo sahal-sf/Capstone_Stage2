@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
 public class Exercise_Adapter extends RecyclerView.Adapter<Exercise_Adapter.MyViewHolder> {
 
     private List<Exercises> exercisesList;
