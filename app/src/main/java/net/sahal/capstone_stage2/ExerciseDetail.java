@@ -56,6 +56,8 @@ public class ExerciseDetail extends AppCompatActivity {
             position = savedInstanceState.getLong(INFO_DETAIL_PLAYER_POSITION, C.TIME_UNSET);
             playWhenReady = savedInstanceState.getBoolean(INFO_DETAIL_PLAY_WHEN_READY);
         }
+
+        setTitle(exercise.getExercise());
     }
 
     @Override
