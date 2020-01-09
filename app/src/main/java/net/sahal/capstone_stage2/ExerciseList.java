@@ -64,9 +64,22 @@ public class ExerciseList extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
-                String value = dataSnapshot.getChildren().toString();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Exercises car = ds.getValue(Exercises.class);
+                    recyclerView.setAdapter(eAdapter);
+
+                    System.out.println(car.getExercise() + " bBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
+
+                }
+//                Exercises exercises2 = dataSnapshot.getValue(Exercises.class);
+
+//                String Value2 = dataSnapshot.getValue(Exercises.class).getExercise();
+//                String value = dataSnapshot.getChildren().toString();
+
 //                        .getValue(String.class);
-                System.out.println(value);
+//                System.out.println(value + " JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ ");
+
+
 
             }
 

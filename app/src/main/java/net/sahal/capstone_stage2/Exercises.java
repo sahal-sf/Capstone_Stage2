@@ -6,6 +6,9 @@ public class Exercises {
     private String videos;
 
 
+    public Exercises() {
+    }
+
     public Exercises(String exercise, String videos) {
         this.exercise = exercise;
         this.videos = videos;
