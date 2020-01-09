@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,24 +27,21 @@ public class MainActivity extends AppCompatActivity {
     EditText Email, Password;
     String email, pass;
     Button SignIn, SignUp;
-    boolean doubleBackToExitPressedOnce = false;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Capstone Stage 2");
+
 
         Email = findViewById(R.id.Email_field);
         Password = findViewById(R.id.Password_field);
         SignIn = findViewById(R.id.Signin_Button);
         SignUp = findViewById(R.id.Signup_Button);
         mAuth = FirebaseAuth.getInstance();
-
-
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
 
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,48 +76,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.SignOut:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getApplicationContext(),"Sign Out Successfully",Toast.LENGTH_LONG).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
     }
 }

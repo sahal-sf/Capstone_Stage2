@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -25,6 +29,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ExerciseDetail extends AppCompatActivity {
 
@@ -142,5 +147,26 @@ public class ExerciseDetail extends AppCompatActivity {
         outState.putLong(INFO_DETAIL_PLAYER_POSITION, position);
         outState.putBoolean(INFO_DETAIL_PLAY_WHEN_READY, playWhenReady);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.SignOut:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ExerciseDetail.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

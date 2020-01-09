@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "105242510860-ichj57cgp0trvhbbm703899a8kmuqjsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.sahal.capstone_stage2",
+            "certificate_hash": "fa202a931cd3daae12d608a57280f60cd44951ac"
+          }
+        },
+        {
           "client_id": "105242510860-5464hu74n4hmr32c2tlm2tho73k3c5r3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

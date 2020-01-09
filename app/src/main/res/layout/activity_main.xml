@@ -1,67 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
     android:paddingLeft="16dp"
+    android:paddingTop="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp">
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-
+    android:paddingBottom="16dp">
 
     <TextView
         android:id="@+id/Signin_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="Sign In"
         android:textColor="#000"
-        android:textSize="30dp"
-        android:layout_centerHorizontal="true"/>
-
+        android:textSize="30dp" />
 
     <EditText
         android:id="@+id/Email_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Signin_word"
         android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/Signin_word"/>
-
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/Password_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Email_field"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_below="@+id/Email_field"/>
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/Signin_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Password_field"
-        android:text="Sign In"/>
+        android:text="Sign In" />
 
     <Button
         android:id="@+id/Signup_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Signin_Button"
-        android:text="Sign Up"/>
-
+        android:text="Sign Up" />
 
 </RelativeLayout>
