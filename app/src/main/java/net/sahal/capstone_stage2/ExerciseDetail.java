@@ -96,28 +96,23 @@ public class ExerciseDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (fullscreen) {
-                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(thisActivity, R.drawable.ic_fullscreen_open));
-                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-
-                    if (((AppCompatActivity) thisActivity).getSupportActionBar() != null) {
-                        ((AppCompatActivity) thisActivity).getSupportActionBar().show();
-                    }
-
-                    thisActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
                     fullscreen = false;
 
+                    thisActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    ((AppCompatActivity) thisActivity).getSupportActionBar().show();
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(thisActivity, R.drawable.ic_fullscreen_open));
+
                 } else {
-                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(thisActivity, R.drawable.ic_fullscreen_close));
-                    thisActivity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-                    if (((AppCompatActivity) thisActivity).getSupportActionBar() != null) {
-                        ((AppCompatActivity) thisActivity).getSupportActionBar().hide();
-                    }
-                    thisActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
                     fullscreen = true;
+
+                    thisActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    ((AppCompatActivity) thisActivity).getSupportActionBar().hide();
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(thisActivity, R.drawable.ic_fullscreen_close));
                 }
             }
         });
