@@ -35,7 +35,7 @@ public class ExerciseList extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
 
     @BindView(R.id.exercises_row)
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

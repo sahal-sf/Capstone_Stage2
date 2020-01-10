@@ -47,7 +47,7 @@ public class ExerciseDetail extends AppCompatActivity {
     private final String INFO_DETAIL_PLAY_WHEN_READY = "Info_Detail_Play_When_Ready";
 
     @BindView(R.id.step_player)
-    private SimpleExoPlayerView player;
+    SimpleExoPlayerView player;
 
     public ExerciseDetail() {
     }
@@ -85,22 +85,22 @@ public class ExerciseDetail extends AppCompatActivity {
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector, loadControl);
             player.setPlayer(mExoPlayer);
-
             player.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH);
 
             String userAgent = Util.getUserAgent(this, "Capstone Stage 2");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     this, userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
-            if (position > 0)
+            if (position > 0) {
                 mExoPlayer.seekTo(position);
+            }
             mExoPlayer.setPlayWhenReady(playWhenReady);
 
-            fullScreen(player);
+            fullScreen();
         }
     }
 
-    public void fullScreen(final SimpleExoPlayerView player) {
+    public void fullScreen() {
         final ImageView fullscreenButton = player.findViewById(R.id.exo_fullscreen_icon);
         final FragmentActivity thisActivity = this;
 

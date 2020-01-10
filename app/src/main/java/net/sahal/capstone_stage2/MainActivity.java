@@ -25,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
     private String pass;
 
     @BindView(R.id.Email_field)
-    private EditText email_text;
+    EditText email_text;
     @BindView(R.id.Password_field)
-    private EditText password_text;
+    EditText password_text;
     @BindView(R.id.Signin_Button)
-    private Button signIn;
+    Button signIn;
     @BindView(R.id.Signup_Button)
-    private Button signUp;
+    Button signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

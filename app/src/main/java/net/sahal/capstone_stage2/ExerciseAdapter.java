@@ -19,7 +19,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
-        public TextView title;
+        TextView title;
 
         public MyViewHolder(View view) {
             super(view);
