@@ -21,11 +21,11 @@ public class SignUp extends AppCompatActivity {
     private String pass;
 
     @BindView(R.id.Email_field)
-    private EditText Email;
+    private EditText email_text;
     @BindView(R.id.Password_field)
-    private EditText Password;
+    private EditText password_text;
     @BindView(R.id.Signup_Button)
-    private Button SignUp;
+    private Button signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,11 @@ public class SignUp extends AppCompatActivity {
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
 
-        SignUp.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = Email.getText().toString();
-                pass = Password.getText().toString();
+                email = email_text.getText().toString();
+                pass = password_text.getText().toString();
 
                 if (email.equals("") || pass.equals("")) {
                     Toast.makeText(SignUp.this, R.string.fill_field, Toast.LENGTH_SHORT).show();
