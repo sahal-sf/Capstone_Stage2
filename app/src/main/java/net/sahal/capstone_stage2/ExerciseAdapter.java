@@ -10,31 +10,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Exercise_Adapter extends RecyclerView.Adapter<Exercise_Adapter.MyViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyViewHolder> {
 
     private List<Exercises> exercisesList;
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.title)
         public TextView title;
-
 
         public MyViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.title);
+            ButterKnife.bind(this, view);
         }
     }
 
 
-    public Exercise_Adapter(List<Exercises> exercisesList) {
+    public ExerciseAdapter(List<Exercises> exercisesList) {
         this.exercisesList = exercisesList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row, parent, false);
-
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
         return new MyViewHolder(itemView);
     }
 

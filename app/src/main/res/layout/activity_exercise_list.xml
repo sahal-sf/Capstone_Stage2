@@ -7,12 +7,10 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp">
-
-
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exercises_row"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </RelativeLayout>

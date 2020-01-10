@@ -31,6 +31,9 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.firebase.auth.FirebaseAuth;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ExerciseDetail extends AppCompatActivity {
 
     private Exercises exercise;
@@ -43,6 +46,9 @@ public class ExerciseDetail extends AppCompatActivity {
     private final String INFO_DETAIL_EXERCISES = "Info_Detail_EXERCISES";
     private final String INFO_DETAIL_PLAY_WHEN_READY = "Info_Detail_Play_When_Ready";
 
+    @BindView(R.id.step_player)
+    private SimpleExoPlayerView player;
+
     public ExerciseDetail() {
     }
 
@@ -50,6 +56,8 @@ public class ExerciseDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activiy_exercise_video);
+
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -73,7 +81,6 @@ public class ExerciseDetail extends AppCompatActivity {
 
     private void initializerPlayer(Uri mediaUri) {
         if (mExoPlayer == null) {
-            SimpleExoPlayerView player = findViewById(R.id.step_player);
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector, loadControl);
@@ -81,7 +88,7 @@ public class ExerciseDetail extends AppCompatActivity {
 
             player.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH);
 
-            String userAgent = Util.getUserAgent(this, "Capstone_Stage2");
+            String userAgent = Util.getUserAgent(this, "Capstone Stage 2");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     this, userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
@@ -163,7 +170,7 @@ public class ExerciseDetail extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(ExerciseDetail.this, MainActivity.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.Success_SignOut, Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

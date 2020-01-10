@@ -19,15 +19,18 @@
 
         <ImageButton
             android:id="@id/exo_repeat_toggle"
-            style="@style/ExoMediaButton" />
+            style="@style/ExoMediaButton"
+            android:contentDescription="@string/exo_controls_repeat_one_description" />
 
         <ImageButton
             android:id="@id/exo_play"
-            style="@style/ExoMediaButton.Play" />
+            style="@style/ExoMediaButton.Play"
+            android:contentDescription="@string/exo_controls_play_description" />
 
         <ImageButton
             android:id="@id/exo_pause"
-            style="@style/ExoMediaButton.Pause" />
+            style="@style/ExoMediaButton.Pause"
+            android:contentDescription="@string/exo_controls_pause_description" />
 
     </LinearLayout>
 
@@ -78,6 +81,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/exo_controls_fullscreen_description"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_fullscreen_open"
                 tools:ignore="VectorDrawableCompat" />

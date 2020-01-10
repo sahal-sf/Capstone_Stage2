@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,19 +25,25 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ExerciseList extends AppCompatActivity {
 
     private List<Exercises> exercisesList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private Exercise_Adapter eAdapter;
+    private ExerciseAdapter eAdapter;
     private boolean doubleBackToExitPressedOnce = false;
+
+    @BindView(R.id.exercises_row)
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_list);
-        setTitle("Exercise List");
+        setTitle(R.string.exercise_list);
 
+        ButterKnife.bind(this);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getInstance().getReference().child("Exercises");
@@ -61,9 +67,7 @@ public class ExerciseList extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.exercises_row);
-
-        eAdapter = new Exercise_Adapter(exercisesList);
+        eAdapter = new ExerciseAdapter(exercisesList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -98,7 +102,7 @@ public class ExerciseList extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(ExerciseList.this, MainActivity.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Sign Out Successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.Success_SignOut, Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -113,7 +117,7 @@ public class ExerciseList extends AppCompatActivity {
         }
 
         doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.back_again, Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
