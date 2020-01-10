@@ -2,45 +2,44 @@ package net.sahal.capstone_stage2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    EditText Email, Password;
-    String email, pass;
-    Button SignIn, SignUp;
+    private String email;
+    private String pass;
 
-
+    @BindView(R.id.Email_field)
+    private EditText Email;
+    @BindView(R.id.Password_field)
+    private EditText Password;
+    @BindView(R.id.Signin_Button)
+    private Button SignIn;
+    @BindView(R.id.Signup_Button)
+    private Button SignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Capstone Stage 2");
+        setTitle(R.string.app_name);
 
-
-        Email = findViewById(R.id.Email_field);
-        Password = findViewById(R.id.Password_field);
-        SignIn = findViewById(R.id.Signin_Button);
-        SignUp = findViewById(R.id.Signup_Button);
+        ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
 
         SignIn.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 pass = Password.getText().toString();
 
                 if (email.equals("") || pass.equals("")) {
-                    Toast.makeText(MainActivity.this, "Please enter EMAIL and PASSWORD.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.fill_field, Toast.LENGTH_SHORT).show();
 
                 } else {
                     mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(i);
 
                             } else {
-                                Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.failed_SignIn, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

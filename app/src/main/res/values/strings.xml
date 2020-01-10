@@ -3,12 +3,12 @@
     <string name="action_sign_in_short">Sign In</string>
     <string name="prompt_name">Display Name</string>
     <string name="prompt_email">Email</string>
-    <string name="Success_SignUp">createUserWithEmail:success</string>
-    <string name="Failed_SignUp">createUserWithEmail:failure</string>
+    <string name="Success_SignUp">Successfully registered, Please Login.</string>
+    <string name="failed_SignIn">Authentication failed.</string>
     <string name="Success_SignOut">Sign Out Successfully</string>
     <string name="prompt_password">Password</string>
 
     <string name="exercise_list">Exercise List</string>
     <string name="back_again">Please click BACK again to exit</string>
-
+    <string name="fill_field">Please enter EMAIL and PASSWORD.</string>
 </resources>
