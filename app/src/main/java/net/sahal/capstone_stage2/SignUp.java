@@ -3,6 +3,7 @@ package net.sahal.capstone_stage2;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String email;
     private String pass;
+    private boolean isConnected;
 
     @BindView(R.id.Email_field)
     EditText email_text;
@@ -37,10 +39,6 @@ public class SignUp extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        if (!isNetworkConnected()) {
-            Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
-        }
-
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +49,8 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, R.string.fill_field, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    if (isNetworkConnected()) {
+                    new NetworkCheck().execute();
+                    if (isConnected) {
                         mAuth = FirebaseAuth.getInstance();
                         mAuth.createUserWithEmailAndPassword(email, pass);
                         Toast.makeText(SignUp.this, R.string.Success_SignUp, Toast.LENGTH_SHORT).show();
@@ -69,5 +68,32 @@ public class SignUp extends AppCompatActivity {
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    public class NetworkCheck extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG).show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... abc) {
+            if (isNetworkConnected()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            isConnected = result;
+            if (!result) {
+                Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
