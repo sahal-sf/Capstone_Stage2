@@ -23,4 +23,6 @@
 
     <string name="Widget_updated">Widget has been updated!</string>
     <string name="appwidget_text">Today is %1$s you have %2$s</string>
+
+    <string name="Internet_Connection">Check your Internet Connection</string>
 </resources>

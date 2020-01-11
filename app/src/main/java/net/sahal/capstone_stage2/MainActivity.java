@@ -1,6 +1,8 @@
 package net.sahal.capstone_stage2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,14 +52,15 @@ public class MainActivity extends AppCompatActivity {
         setTitle(R.string.app_name);
 
         ButterKnife.bind(this);
-        mAuth = FirebaseAuth.getInstance();
 
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        if (!isNetworkConnected()) {
+            Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+
+        } else {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        }
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,18 +72,23 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, R.string.fill_field, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Intent i = new Intent(MainActivity.this, ExerciseList.class);
-                                startActivity(i);
+                    if (isNetworkConnected()) {
+                        mAuth = FirebaseAuth.getInstance();
+                        mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Intent i = new Intent(MainActivity.this, ExerciseList.class);
+                                    startActivity(i);
 
-                            } else {
-                                Toast.makeText(MainActivity.this, R.string.failed_SignIn, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(MainActivity.this, R.string.failed_SignIn, Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -96,7 +104,12 @@ public class MainActivity extends AppCompatActivity {
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                if (isNetworkConnected()) {
+                    signIn();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -136,5 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

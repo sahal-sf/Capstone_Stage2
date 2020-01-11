@@ -1,6 +1,8 @@
 package net.sahal.capstone_stage2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +36,10 @@ public class SignUp extends AppCompatActivity {
         setTitle("SignUp");
 
         ButterKnife.bind(this);
-        mAuth = FirebaseAuth.getInstance();
+
+        if (!isNetworkConnected()) {
+            Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+        }
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,12 +51,23 @@ public class SignUp extends AppCompatActivity {
                     Toast.makeText(SignUp.this, R.string.fill_field, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    mAuth.createUserWithEmailAndPassword(email, pass);
-                    Toast.makeText(SignUp.this, R.string.Success_SignUp, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SignUp.this, MainActivity.class);
-                    startActivity(i);
+                    if (isNetworkConnected()) {
+                        mAuth = FirebaseAuth.getInstance();
+                        mAuth.createUserWithEmailAndPassword(email, pass);
+                        Toast.makeText(SignUp.this, R.string.Success_SignUp, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(SignUp.this, MainActivity.class);
+                        startActivity(i);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.Internet_Connection, Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }
