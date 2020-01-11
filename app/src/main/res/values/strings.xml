@@ -15,5 +15,12 @@
     <string name="exercise_list">Exercise List</string>
     <string name="back_again">Please click BACK again to exit</string>
     <string name="fill_field">Please enter EMAIL and PASSWORD.</string>
+    <string name="add_widget">Add widget</string>
 
+    <string name="update"><u>Tap to update</u></string>
+    <string name="last_update">Last Update</string>
+    <string name="time">Last Update : %1$s</string>
+
+    <string name="Widget_updated">Widget has been updated!</string>
+    <string name="appwidget_text">Today is %1$s you have %2$s</string>
 </resources>
